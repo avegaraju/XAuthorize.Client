@@ -36,12 +36,12 @@ namespace XAuthorize.Client.Elements
         {
             XElement attributeValueElement = CreateAttributeValueElement(attributeValueDataType);
 
-            XElement attributeElement = CreateAttributeElementAndAttributes(includeInResult, attributeId, attributeValueElement);
+            XElement attributeElement = CreateAttributeElementAndItsAttributes(includeInResult, attributeId, attributeValueElement);
 
             return attributeElement;
         }
 
-        private XElement CreateAttributeElementAndAttributes(bool includeInResult, Subject attributeId, XElement attributeValueElement)
+        private XElement CreateAttributeElementAndItsAttributes(bool includeInResult, Subject attributeId, XElement attributeValueElement)
         {
             var attributeElement = CreateElement("Attribute");
 
