@@ -21,8 +21,8 @@ namespace XAuthorize.Client.Elements
     public class AttributesElementCreator: ElementCreator, IAttributesElementCreator
     {
         private readonly RequestBuilder _requestBuilder;
-        private readonly SubjectCategory _subjectCategory;
         private readonly XElement _requestElement;
+        private readonly SubjectCategory _subjectCategory;
 
         public AttributesElementCreator(XElement requestElement, RequestBuilder requestBuilder)
         {
@@ -44,13 +44,12 @@ namespace XAuthorize.Client.Elements
         {
             IEnumerable<XElement> attributeElementList = CreateAttributeElementList(attributeElementCreatorAction);
 
-            return CreateAttributesElement(subjectCategory, attributeElementList);
+            return CreateAttributesElementAndItsChilderen(subjectCategory, attributeElementList);
         }
 
         private static IEnumerable<XElement> CreateAttributeElementList(
             Action<AttributeElementCreator> attributeElementCreatorAction)
         {
-
             var attributeElementCreator = ExecuteAction(attributeElementCreatorAction);
 
             return attributeElementCreator.AttributeElementList;
@@ -65,8 +64,8 @@ namespace XAuthorize.Client.Elements
             return attributeElementCreator;
         }
 
-        private XElement CreateAttributesElement(SubjectCategory subjectCategory,
-                                                 IEnumerable<XElement> attributeElementList)
+        private XElement CreateAttributesElementAndItsChilderen(SubjectCategory subjectCategory,
+                                                                IEnumerable<XElement> attributeElementList)
         {
             var categoryAttribute = CreateCategoryAttribute(subjectCategory);
 

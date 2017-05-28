@@ -27,18 +27,35 @@ namespace XAuthorize.Client.Elements
                                              string attributeValue,
                                              AttributeValueDataType attributeValueDataType)
         {
-            var attributeElement = CreateElement("Attribute");
+            XElement attributeElement = CreateAttributeElement(includeInResult, attributeId, attributeValueDataType);
 
-            var attributeValueElement =
-                    _attributeValueElementCreator.CreateAttributeValueElement(attributeValueDataType);
+            _attributeElementList.Add(attributeElement);
+        }
+
+        private XElement CreateAttributeElement(bool includeInResult, Subject attributeId, AttributeValueDataType attributeValueDataType)
+        {
+            XElement attributeValueElement = CreateAttributeValueElement(attributeValueDataType);
+
+            XElement attributeElement = CreateAttributeElementAndAttributes(includeInResult, attributeId, attributeValueElement);
+
+            return attributeElement;
+        }
+
+        private XElement CreateAttributeElementAndAttributes(bool includeInResult, Subject attributeId, XElement attributeValueElement)
+        {
+            var attributeElement = CreateElement("Attribute");
 
             attributeElement.Add(CreateAttribute("IncludeInResult", includeInResult),
                                   CreateAttribute("AttributeId",
                                                   RequestSchema.SubjectAttributeIdUrn +
                                                   RequestSchema.GetUrnValue(attributeId.ToString())),
                                   attributeValueElement);
+            return attributeElement;
+        }
 
-            _attributeElementList.Add(attributeElement);
+        private XElement CreateAttributeValueElement(AttributeValueDataType attributeValueDataType)
+        {
+            return _attributeValueElementCreator.CreateAttributeValueElement(attributeValueDataType);
         }
     }
 }
