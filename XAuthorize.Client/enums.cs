@@ -6,4 +6,14 @@ namespace XAuthorize.Client
     {
         AccessSubject
     }
+
+    public enum Subject
+    {
+        SubjectId
+    }
+
+    public enum AttributeValueDataType
+    {
+        Email
+    }
 }

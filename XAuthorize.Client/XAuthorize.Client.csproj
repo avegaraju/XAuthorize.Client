@@ -40,21 +40,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elements\AttributesElementCreator.cs" />
+    <Compile Include="Elements\AttributeValueElementCreator.cs" />
     <Compile Include="Builders\RequestBuilder.cs" />
+    <Compile Include="Elements\ElementCreator.cs" />
+    <Compile Include="Elements\RequestElementCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Identifiers.cs" />
-    <Compile Include="RequestResources.Designer.cs">
+    <Compile Include="enums.cs" />
+    <Compile Include="RequestResource.Urn.Value.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RequestResources.resx</DependentUpon>
+      <DependentUpon>RequestResource.Urn.Value.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RequestResource.Urn.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequestResource.Urn.resx</DependentUpon>
     </Compile>
     <Compile Include="RequestSchema.cs" />
-    <Compile Include="Subject.cs" />
+    <Compile Include="Elements\AttributeElementCreator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="RequestResources.resx">
+    <EmbeddedResource Include="RequestResource.Urn.Value.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RequestResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>RequestResource.Urn.Value.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RequestResource.Urn.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RequestResource.Urn.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

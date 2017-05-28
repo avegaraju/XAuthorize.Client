@@ -1,39 +1,33 @@
-﻿using System;
-using System.Reflection;
-using System.Resources;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
+
+using XAuthorize.Client.Elements;
 
 namespace XAuthorize.Client.Builders
 {
     public class RequestBuilder
     {
         private readonly XDocument _requestDocument;
+        private readonly RequestElementCreator _requestElementCreator;
 
         public RequestBuilder()
         {
+            _requestElementCreator = new RequestElementCreator();
             _requestDocument = new XDocument();
-        }
-
-        /// <summary>
-        ///     Adds XACML 'element &lt;Attributes Category="urn:oasis:names:tc:xacml:1.0:subject-category:' to the
-        ///     Request document
-        /// </summary>
-        /// <param name="subjectAction"></param>
-        /// <returns>A builder to build additional elements and attributes.</returns>
-        public RequestBuilder HavingSubject(Action<Subject> subjectAction)
-        {
-            var subject = new Subject();
-
-            subjectAction(subject);
-
-            _requestDocument.Add(subject.AttributesElement);
-
-            return this;
         }
 
         public XDocument Build()
         {
             return _requestDocument;
         }
+
+        public IAttributesElementCreator AddRequestElement(bool returnPolicyIdList, bool combinedDecision)
+        {
+            var requestElement = _requestElementCreator.CreateRequestElement(returnPolicyIdList, combinedDecision);
+            _requestDocument.Add(requestElement);
+
+            return new AttributesElementCreator(requestElement, this);
+        }
     }
+
+    
 }
